@@ -15,8 +15,12 @@ export default function ProductsPage() {
         console.log('Fetching products from:', process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000")
         const response = await medusaClient.products.list()
         console.log('API response:', response)
+        console.log('Products array:', response.products)
+        if (response.products && response.products.length > 0) {
+          console.log('First product structure:', response.products[0])
+        }
         const { products } = response
-        setProducts(products)
+        setProducts(products || [])
         setLoading(false)
       } catch (err) {
         console.error('Error fetching products:', err)
@@ -84,7 +88,7 @@ export default function ProductsPage() {
                 </div>
                 <h3 className="mt-4 text-sm text-gray-700">{product.title}</h3>
                 <p className="mt-1 text-lg font-medium text-gray-900">
-                  {product.variants[0]?.prices[0]?.amount
+                  {product.variants && product.variants.length > 0 && product.variants[0].prices && product.variants[0].prices.length > 0
                     ? `$${(product.variants[0].prices[0].amount / 100).toFixed(2)}`
                     : 'Price not available'}
                 </p>
