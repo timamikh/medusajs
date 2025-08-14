@@ -1,62 +1,94 @@
-<p align="center">
-  <a href="https://www.medusajs.com">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/59018053/229103275-b5e482bb-4601-46e6-8142-244f531cebdb.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg">
-    <img alt="Medusa logo" src="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg">
-    </picture>
-  </a>
-</p>
-<h1 align="center">
-  Medusa
-</h1>
+# Medusa E-commerce Project
 
-<h4 align="center">
-  <a href="https://docs.medusajs.com">Documentation</a> |
-  <a href="https://www.medusajs.com">Website</a>
-</h4>
+Проект на базе Medusa.js с бэкендом, админкой и клиентской частью.
 
-<p align="center">
-  Building blocks for digital commerce
-</p>
-<p align="center">
-  <a href="https://github.com/medusajs/medusa/blob/master/CONTRIBUTING.md">
-    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat" alt="PRs welcome!" />
-  </a>
-    <a href="https://www.producthunt.com/posts/medusa"><img src="https://img.shields.io/badge/Product%20Hunt-%231%20Product%20of%20the%20Day-%23DA552E" alt="Product Hunt"></a>
-  <a href="https://discord.gg/xpCwq3Kfn8">
-    <img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg" alt="Discord Chat" />
-  </a>
-  <a href="https://twitter.com/intent/follow?screen_name=medusajs">
-    <img src="https://img.shields.io/twitter/follow/medusajs.svg?label=Follow%20@medusajs" alt="Follow @medusajs" />
-  </a>
-</p>
+## Структура проекта
 
-## Compatibility
+- `medusajs/` - корневая директория бэкенда
+- `medusajs/storefront/` - клиентская часть на Next.js
 
-This starter is compatible with versions >= 2 of `@medusajs/medusa`. 
+## Настройка и запуск
 
-## Getting Started
+### Предварительные требования
 
-Visit the [Quickstart Guide](https://docs.medusajs.com/learn/installation) to set up a server.
+1. Node.js (версия 20+)
+2. Docker Desktop (для PostgreSQL)
+3. Git
 
-Visit the [Docs](https://docs.medusajs.com/learn/installation#get-started) to learn more about our system requirements.
+### Первоначальная настройка
 
-## What is Medusa
+1. **Настройка базы данных**
 
-Medusa is a set of commerce modules and tools that allow you to build rich, reliable, and performant commerce applications without reinventing core commerce logic. The modules can be customized and used to build advanced ecommerce stores, marketplaces, or any product that needs foundational commerce primitives. All modules are open-source and freely available on npm.
+   ```powershell
+   # Запустите скрипт настройки базы данных
+   .\setup-database.ps1
+   ```
 
-Learn more about [Medusa’s architecture](https://docs.medusajs.com/learn/introduction/architecture) and [commerce modules](https://docs.medusajs.com/learn/fundamentals/modules/commerce-modules) in the Docs.
+2. **Создание пользователя админки**
 
-## Community & Contributions
+   ```powershell
+   # Запустите скрипт создания пользователя
+   .\setup-user.ps1
+   ```
 
-The community and core team are available in [GitHub Discussions](https://github.com/medusajs/medusa/discussions), where you can ask for support, discuss roadmap, and share ideas.
+### Запуск компонентов
 
-Join our [Discord server](https://discord.com/invite/medusajs) to meet other community members.
+1. **Запуск бэкенда**
 
-## Other channels
+   ```powershell
+   # Запустите скрипт запуска бэкенда
+   .\start-backend.ps1
+   ```
 
-- [GitHub Issues](https://github.com/medusajs/medusa/issues)
-- [Twitter](https://twitter.com/medusajs)
-- [LinkedIn](https://www.linkedin.com/company/medusajs)
-- [Medusa Blog](https://medusajs.com/blog/)
+2. **Запуск админки**
+
+   ```powershell
+   # В новом окне терминала запустите скрипт запуска админки
+   .\start-admin.ps1
+   ```
+
+3. **Запуск клиентской части**
+
+   ```powershell
+   # В новом окне терминала перейдите в директорию storefront
+   cd storefront
+   
+   # Запустите скрипт запуска клиентской части
+   .\start-frontend.ps1
+   ```
+
+## Доступ к компонентам
+
+- **Бэкенд API**: http://localhost:9000
+- **Админка**: http://localhost:9000/app
+- **Клиентская часть**: http://localhost:3000
+
+## Данные для входа в админку
+
+- Email: admin@medusa.com
+- Пароль: supersecret
+
+## Конфигурация
+
+Конфигурация хранится в следующих файлах:
+
+- **Бэкенд**: `medusa-config.js` и `medusa-config.ts`
+- **Клиентская часть**: `storefront/next.config.js`
+
+## Переменные окружения
+
+Все необходимые переменные окружения установлены в скриптах запуска.
+
+## Устранение неполадок
+
+1. **Ошибка подключения к базе данных**
+   
+   Убедитесь, что Docker запущен и контейнер с PostgreSQL активен.
+
+2. **Ошибка запуска бэкенда**
+   
+   Проверьте, что порт 9000 не занят другим процессом.
+
+3. **Ошибка запуска клиентской части**
+   
+   Проверьте, что порт 3000 не занят другим процессом.
