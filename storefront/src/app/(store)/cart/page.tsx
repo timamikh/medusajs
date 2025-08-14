@@ -33,8 +33,10 @@ export default function CartPage() {
         const cartId = localStorage.getItem('cart_id')
         
         if (!cartId) {
-          // Если корзины нет, создаем новую
-          const response = await medusaClient.carts.create({})
+          // Если корзины нет, создаем новую с указанием региона
+          const response = await medusaClient.carts.create({
+            region_id: 'reg_01K2JSQZG6D53TQEC2F7V3Y41P' // Europe region
+          })
           console.log('Created new cart:', response)
           const { cart } = response
           localStorage.setItem('cart_id', cart.id)

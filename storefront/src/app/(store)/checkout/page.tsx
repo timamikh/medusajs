@@ -39,6 +39,16 @@ export default function CheckoutPage() {
         const cartId = localStorage.getItem('cart_id')
         
         if (!cartId) {
+          // Если корзины нет, создаем новую и перенаправляем на корзину
+          try {
+            const response = await medusaClient.carts.create({
+              region_id: 'reg_01K2JSQZG6D53TQEC2F7V3Y41P' // Europe region
+            })
+            const { cart } = response
+            localStorage.setItem('cart_id', cart.id)
+          } catch (error) {
+            console.error('Error creating cart:', error)
+          }
           router.push('/cart')
           return
         }
